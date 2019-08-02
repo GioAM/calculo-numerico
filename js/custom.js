@@ -9,20 +9,22 @@ function Iteracao(id, A, B, X, Fx, taxaDeErro) {
 $('#bissecao').click(function(){
   bissecao();
 });
-function calcularMaxIteracoes(){
-  return $('#iteracao').val();
+function calcularMaxIteracoes(A, B, errorTax){
+  var valor = (B - A)/errorTax;
+  var total = Math.log(valor)/Math.log(2);
+  return parseInt(total,10)
 }
 function funcao(value){
   var total = Math.pow(value, 2) - 2;
-  return total;
+  return parseFloat(total.toFixed(4));
 }
 function calcularPontoMedio(A,B){
-  var total = A + B;
-  console.log(total);
-  return total/2;
+  var total = (A + B) / 2;
+  return parseFloat(total.toFixed(4));
 }
 function calcularTaxaDeErro(A,B){
-  return B - A;
+  var total = (B - A) / 2;
+  return parseFloat(total.toFixed(4));
 }
 function drawTable(iteracoes){
   $("#table-bissecao").empty();
@@ -39,7 +41,8 @@ function bissecao(){
   var B = parseInt($('#valueB').val(),10);
   var X = calcularPontoMedio(A,B);
   var Fx = funcao(X);
-  var maxIt = calcularMaxIteracoes();
+  var taxErro = $('#errorTax').val();
+  var maxIt = calcularMaxIteracoes(A, B, taxErro);
   var iteracao = new Iteracao(0, A, B, X, Fx, "-");
   iteracoes.push(iteracao);
   for(var i = 1; i <= maxIt; i++){
@@ -50,7 +53,7 @@ function bissecao(){
     }
     X = calcularPontoMedio(A,B);
     Fx = funcao(X);
-    var taxaDeErro = X - B;
+    var taxaDeErro = calcularTaxaDeErro(A,B);
     var iteracao = new Iteracao(i, A, B, X, Fx, Math.abs(taxaDeErro));
     iteracoes.push(iteracao);
   }
