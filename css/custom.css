@@ -1,0 +1,34 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.col-md-8{
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+.btn-calculo{
+    text-align: center;
+}
+.btn-calculo button{
+    width: 20%;
+}
+label{
+  margin-left: 6px;
+}
+.table thead th{
+  width: 16.667%;
+  cursor: pointer;
+}
+.table tbody th{
+  cursor: pointer;
+}
