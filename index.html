@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="./css/custom.css" rel="stylesheet">
+    <script src="https://unpkg.com/mathjs@6.2.3/dist/math.js" type="text/javascript"></script>
   </head>
   <body>
     <header>
@@ -40,19 +41,19 @@
             <div class="row">
               <div class="col-md-3 mb-3">
                 <label for="firstName">f(x)</label>
-                <input type="text" class="form-control" id="function" placeholder="" value="x^2-2" disabled>
+                <input type="text" class="form-control" id="function" placeholder="" value="" >
               </div>
               <div class="col-md-3 mb-3">
                 <label for="lastName">A</label>
-                <input type="number" class="form-control" id="valueA" placeholder="" value="1" disabled>
+                <input type="number" class="form-control" id="valueA" placeholder="" value="" >
               </div>
               <div class="col-md-3 mb-3">
                 <label for="lastName">B</label>
-                <input type="number" class="form-control" id="valueB" placeholder="" value="2" disabled>
+                <input type="number" class="form-control" id="valueB" placeholder="" value="" >
               </div>
               <div class="col-md-3 mb-3">
                 <label for="lastName">Taxa de Erro</label>
-                <input type="text" class="form-control" id="errorTax" placeholder="" value="0.01" disabled>
+                <input type="text" class="form-control" id="errorTax" placeholder="" value="" >
               </div>
             </div>
             <table class="table table-hover" id="table-bissecao">
@@ -60,6 +61,51 @@
             <div class="btn-calculo">
               <button class="btn btn-primary btn-lg" id="bissecao">Calcular</button>
             </div>
+          </div>
+        </div>
+        <div class="py-5 text-center">
+          <img class="d-block mx-auto mb-4" src="./img/line-graph.png" alt="" width="72" height="72">
+          <h2>Secantes</h2>
+          <p class="lead">
+              É um método de busca de raízes que usa uma sequência de raízes de linhas secantes para aproximar cada vez melhor a raiz de uma função <i>f(x)</i>.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-8 order-md-1">
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="firstName">f(x)</label>
+                <input type="text" class="form-control" id="functionSec" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">A</label>
+                <input type="number" class="form-control" id="valueASec" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">B</label>
+                <input type="number" class="form-control" id="valueBSec" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">Taxa de Erro</label>
+                <input type="text" class="form-control" id="errorTaxSec" placeholder="" value="" >
+              </div>
+            </div>
+            <table class="table table-hover" id="table-secantes">
+            </table>
+            <div class="btn-calculo">
+              <button class="btn btn-primary btn-lg" id="secantes">Calcular</button>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:30px;">
+          <div class="card-header text-center text-white bg-info mb-3" style="height: 40px;">
+              <h5 class="card-title" style="margin-top: -4px;">IMPORTANTE</h5>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sintaxe</h5>
+            <p class="card-text">Para as funções utilize a síntaxe da biblioteca <strong>Mathjs</strong>. Disponível em: <a target="_blank" href="https://mathjs.org/docs/expressions/syntax.html">https://mathjs.org/docs/expressions/syntax.html</a></p>
+            <h5 class="card-title">Variável</h5>
+            <p class="card-text">Utilize a letra 'x' para demonstrar as variaveis</p>
           </div>
         </div>
       </div>
