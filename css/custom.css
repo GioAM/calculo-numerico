@@ -6,7 +6,10 @@
   -ms-user-select: none;
   user-select: none;
 }
-
+#secButton, #bisButton, #btnImportant{
+  background: none;
+  border: none;
+}
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;

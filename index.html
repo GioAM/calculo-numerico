@@ -19,7 +19,25 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Bisseção <span class="sr-only">(current)</span></a>
+              <button class="nav-link" id="bisButton">Bisseção</button>
+            </li>
+            <li class="nav-item active">
+              <button class="nav-link" id="secButton">Secantes</button>
+            </li>
+            <li class="nav-item active" style="position: absolute;right: 0;">
+              <div class="dropdown">
+                <button style="color:#fff"id="btnImportant" type="button" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  IMPORTANTE
+                </button>
+                <div class="dropdown-menu" style="right:2px; left: -260px">
+                  <div class="card-body">
+                    <h5 class="card-title">Sintaxe</h5>
+                    <p class="card-text">Para as funções utilize a síntaxe da biblioteca <strong>Mathjs</strong>. Disponível em: <a target="_blank" href="https://mathjs.org/docs/expressions/syntax.html">https://mathjs.org/docs/expressions/syntax.html</a></p>
+                    <h5 class="card-title">Variável</h5>
+                    <p class="card-text">Utilize a letra 'x' para demonstrar as variaveis</p>
+                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -63,6 +81,7 @@
             </div>
           </div>
         </div>
+        <hr class="my-4" style="margin-top: 6.0rem!important;">
         <div class="py-5 text-center">
           <img class="d-block mx-auto mb-4" src="./img/line-graph.png" alt="" width="72" height="72">
           <h2>Secantes</h2>
@@ -97,21 +116,10 @@
             </div>
           </div>
         </div>
-        <div class="card" style="margin-top:30px;">
-          <div class="card-header text-center text-white bg-info mb-3" style="height: 40px;">
-              <h5 class="card-title" style="margin-top: -4px;">IMPORTANTE</h5>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Sintaxe</h5>
-            <p class="card-text">Para as funções utilize a síntaxe da biblioteca <strong>Mathjs</strong>. Disponível em: <a target="_blank" href="https://mathjs.org/docs/expressions/syntax.html">https://mathjs.org/docs/expressions/syntax.html</a></p>
-            <h5 class="card-title">Variável</h5>
-            <p class="card-text">Utilize a letra 'x' para demonstrar as variaveis</p>
-          </div>
-        </div>
       </div>
     </main>
     <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">Giovani Meneguel - 2019</p>
+      <p class="mb-1">2019</p>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
        <script src="./js/custom.js" ></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
