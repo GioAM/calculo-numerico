@@ -18,6 +18,12 @@ $('#bissecao').click(function(){
 $('#bisButton').click(function(){
   bissecao.show();
 });
+$('#newton').click(function(){
+  newton.init();
+});
+$('#newButton').click(function(){
+  newton.show();
+});
 bissecao = {
   init : function(){
     var iteracoes = [];
@@ -136,4 +142,69 @@ secantes ={
     $("#table-bissecao").empty();
     window.scrollTo({ top: 600, behavior: 'smooth' });
   }
+}
+newton = {
+  init : function(){
+    var iteracoes = [];
+    var A = parseFloat($('#valueANewton').val());
+    var B = parseFloat($('#valueBNewton').val());
+    var taxErro = $('#errorTaxNewton').val();
+    var funcao = $("#functionNewton").val();
+    var erro = 1
+    var id = 1;
+
+    var valorInicial = this.valorInicial(funcao, A, B);
+    var Fa = this.funcao(funcao, valorInicial);
+
+    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(4)) , "-");
+    iteracoes.push(iteracao);
+
+    while(erro > taxErro){
+      this.calcular(iteracoes, id);
+      erro = iteracoes[id].taxaDeErro;
+      id++;
+    }
+
+    this.drawTable(iteracoes);
+  },
+  valorInicial : function(funcao, A, B){
+    var funcao1 = math.derivative(funcao,"x").toString();
+    var funcao2 = math.derivative(funcao1,"x").toString();
+    var valueA = this.funcao(funcao, A) * this.funcao(funcao2, A);
+    return valueA>1 ? A : B;
+  },
+  calcular : function(iteracoes, id){
+    var funcao = $("#functionNewton").val();
+    var funcao1 = math.derivative(funcao,"x").toString();
+    var valor = iteracoes[id - 1].X;
+    var Fx = this.funcao(funcao, valor);
+    var Fx1 = this.funcao(funcao1, valor);
+    var total = valor - ( Fx / Fx1 );
+    var erro = Math.abs(total - valor);
+    var Fx = this.funcao(funcao, total);
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(4)), parseFloat(Fx.toFixed(4)), parseFloat(erro.toFixed(4)));
+    iteracoes.push(iteracao);
+  },
+  funcao : function(funcao, value){
+    var scope = {
+      x: value
+    }
+    var total = math.evaluate(funcao, scope);
+    return parseFloat(total.toFixed(4));
+  },
+  show : function(){
+    $("#table-secantes").empty();
+    $("#table-bissecao").empty();
+    $("#table-newton").empty();
+    window.scrollTo({ top: 1200, behavior: 'smooth' });
+  },
+  drawTable : function(iteracoes){
+    $("#table-newton").empty();
+    var taxErro = $('#errorTaxNewton').val();
+    $('#table-newton').append(`<thead id='thead-newton'><tr><th scope='col'>n</th><th scope='col'>Xn</th><th scope='col'>f(Xn)</th><th scope='col'>Taxa de Erro(${taxErro})</th></tr></thead><tbody id='tbody-newton'></tbody>`);
+     for(var i = 0; i < iteracoes.length; i++){
+       var element = iteracoes[i];
+       $('#tbody-newton').append(`<tr><th>${element.id}</th><th>${element.X}</th><th>${element.Fx}</th><th>${element.taxaDeErro}</th></tr>`)
+     }
+  },
 }

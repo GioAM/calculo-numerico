@@ -24,6 +24,9 @@
             <li class="nav-item active">
               <button class="nav-link" id="secButton">Secantes</button>
             </li>
+            <li class="nav-item active">
+              <button class="nav-link" id="newButton">Newton</button>
+            </li>
             <li class="nav-item active" style="position: absolute;right: 0;">
               <div class="dropdown">
                 <button style="color:#fff"id="btnImportant" type="button" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,6 +116,41 @@
             </table>
             <div class="btn-calculo">
               <button class="btn btn-primary btn-lg" id="secantes">Calcular</button>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" style="margin-top: 6.0rem!important;">
+        <div class="py-5 text-center">
+          <img class="d-block mx-auto mb-4" src="./img/apple.png" alt="" width="72" height="72">
+          <h2>Newton</h2>
+          <p class="lead">
+            Consiste em definir a nova iteração a partir da intersecção com o eixo das abcissas da tangente à função f(calculada na iteração anterior).
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-8 order-md-1">
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="firstName">f(x)</label>
+                <input type="text" class="form-control" id="functionNewton" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">A</label>
+                <input type="number" class="form-control" id="valueANewton" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">B</label>
+                <input type="number" class="form-control" id="valueBNewton" placeholder="" value="" >
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="lastName">Taxa de Erro</label>
+                <input type="text" class="form-control" id="errorTaxNewton" placeholder="" value="" >
+              </div>
+            </div>
+            <table class="table table-hover" id="table-newton">
+            </table>
+            <div class="btn-calculo">
+              <button class="btn btn-primary btn-lg" id="newton">Calcular</button>
             </div>
           </div>
         </div>
