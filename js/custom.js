@@ -165,11 +165,9 @@ newton = {
     if($('#defaultCheck1').is(':checked')){
       valorInicial = A;
     }
-
-    console.log(valorInicial);
     var Fa = this.funcao(funcao, valorInicial);
 
-    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(4)) , "-");
+    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(this.casasDecimais())) , "-");
     iteracoes.push(iteracao);
 
     while(erro > taxErro){
@@ -182,6 +180,9 @@ newton = {
     }
 
     this.drawTable(iteracoes);
+  },
+  casasDecimais: function(){
+    return parseInt($("#casasDecimaisNewton").val());
   },
   valorInicial : function(funcao, A, B){
     var funcao1 = math.derivative(funcao,"x").toString();
@@ -198,7 +199,7 @@ newton = {
     var total = valor - ( Fx / Fx1 );
     var erro = Math.abs(total - valor);
     var Fx = this.funcao(funcao, total);
-    var iteracao = new Iteracao(id, parseFloat(total.toFixed(4)), parseFloat(Fx.toFixed(4)), parseFloat(erro.toFixed(4)));
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(this.casasDecimais())), parseFloat(Fx.toFixed(this.casasDecimais())), parseFloat(erro.toFixed(this.casasDecimais())));
     iteracoes.push(iteracao);
   },
   funcao : function(funcao, value){
@@ -206,7 +207,7 @@ newton = {
       x: value
     }
     var total = math.evaluate(funcao, scope);
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(this.casasDecimais()));
   },
   show : function(){
     $("#table-secantes").empty();
