@@ -35,7 +35,8 @@ label{
 .table tbody th{
   cursor: pointer;
 }
-#complementos{
-  display: flex;
-  width: 100%;
+#check-newton{
+  padding-left: 2.25rem;
+  margin-top: -34px;
+  position: absolute;
 }
