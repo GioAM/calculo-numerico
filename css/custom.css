@@ -35,3 +35,8 @@ label{
 .table tbody th{
   cursor: pointer;
 }
+#check-newton{
+  padding-left: 2.25rem;
+  margin-top: -34px;
+  position: absolute;
+}

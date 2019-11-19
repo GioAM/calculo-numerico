@@ -6,6 +6,14 @@ function Iteracao(id, X, Fx, taxaDeErro, A, B) {
   this.Fx = Fx;
   this.taxaDeErro = taxaDeErro;
 }
+$('#defaultCheck1').click(function(){
+  if($('#defaultCheck1').is(':checked')){
+    $('#valueBNewton').attr('disabled','true');
+    $('#valueBNewton').val('');
+  }else{
+    $('#valueBNewton').removeAttr("disabled");
+  }
+});
 $('#secantes').click(function(){
   secantes.init();
 });
@@ -152,8 +160,13 @@ newton = {
     var funcao = $("#functionNewton").val();
     var erro = 1
     var id = 1;
-
     var valorInicial = this.valorInicial(funcao, A, B);
+
+    if($('#defaultCheck1').is(':checked')){
+      valorInicial = A;
+    }
+
+    console.log(valorInicial);
     var Fa = this.funcao(funcao, valorInicial);
 
     var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(4)) , "-");
@@ -163,6 +176,9 @@ newton = {
       this.calcular(iteracoes, id);
       erro = iteracoes[id].taxaDeErro;
       id++;
+      if(id > 10){
+        break;
+      }
     }
 
     this.drawTable(iteracoes);
