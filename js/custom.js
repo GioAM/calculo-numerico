@@ -6,6 +6,14 @@ function Iteracao(id, X, Fx, taxaDeErro, A, B) {
   this.Fx = Fx;
   this.taxaDeErro = taxaDeErro;
 }
+$('#defaultCheck1').click(function(){
+  if($('#defaultCheck1').is(':checked')){
+    $('#valueBNewton').attr('disabled','true');
+    $('#valueBNewton').val('');
+  }else{
+    $('#valueBNewton').removeAttr("disabled");
+  }
+});
 $('#secantes').click(function(){
   secantes.init();
 });
@@ -152,20 +160,29 @@ newton = {
     var funcao = $("#functionNewton").val();
     var erro = 1
     var id = 1;
-
     var valorInicial = this.valorInicial(funcao, A, B);
+
+    if($('#defaultCheck1').is(':checked')){
+      valorInicial = A;
+    }
     var Fa = this.funcao(funcao, valorInicial);
 
-    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(4)) , "-");
+    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(this.casasDecimais())) , "-");
     iteracoes.push(iteracao);
 
     while(erro > taxErro){
       this.calcular(iteracoes, id);
       erro = iteracoes[id].taxaDeErro;
       id++;
+      if(id > 10){
+        break;
+      }
     }
 
     this.drawTable(iteracoes);
+  },
+  casasDecimais: function(){
+    return parseInt($("#casasDecimaisNewton").val());
   },
   valorInicial : function(funcao, A, B){
     var funcao1 = math.derivative(funcao,"x").toString();
@@ -182,7 +199,7 @@ newton = {
     var total = valor - ( Fx / Fx1 );
     var erro = Math.abs(total - valor);
     var Fx = this.funcao(funcao, total);
-    var iteracao = new Iteracao(id, parseFloat(total.toFixed(4)), parseFloat(Fx.toFixed(4)), parseFloat(erro.toFixed(4)));
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(this.casasDecimais())), parseFloat(Fx.toFixed(this.casasDecimais())), parseFloat(erro.toFixed(this.casasDecimais())));
     iteracoes.push(iteracao);
   },
   funcao : function(funcao, value){
@@ -190,7 +207,7 @@ newton = {
       x: value
     }
     var total = math.evaluate(funcao, scope);
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(this.casasDecimais()));
   },
   show : function(){
     $("#table-secantes").empty();
