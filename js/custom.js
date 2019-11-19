@@ -33,6 +33,12 @@ $('#newton').click(function(){
 $('#newButton').click(function(){
   newton.show();
 });
+$('#juros').click(function(){
+  juros.init();
+});
+$('#jurosButton').click(function(){
+  juros.show();
+});
 bissecao = {
   init : function(){
     var iteracoes = [];
@@ -91,6 +97,8 @@ bissecao = {
   show : function(){
     $("#table-bissecao").empty();
     $("#table-secantes").empty();
+    $("#table-juros").empty();
+    $("#table-newton").empty();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
@@ -149,6 +157,8 @@ secantes ={
   show : function(){
     $("#table-secantes").empty();
     $("#table-bissecao").empty();
+    $("#table-juros").empty();
+    $("#table-newton").empty();
     window.scrollTo({ top: 600, behavior: 'smooth' });
   }
 }
@@ -212,6 +222,7 @@ newton = {
     $("#table-secantes").empty();
     $("#table-bissecao").empty();
     $("#table-newton").empty();
+    $("#table-juros").empty();
     window.scrollTo({ top: 1200, behavior: 'smooth' });
   },
   drawTable : function(iteracoes){
@@ -221,6 +232,72 @@ newton = {
      for(var i = 0; i < iteracoes.length; i++){
        var element = iteracoes[i];
        $('#tbody-newton').append(`<tr><th>${element.id}</th><th>${element.X}</th><th>${element.Fx}</th><th>${element.taxaDeErro}</th></tr>`)
+     }
+  },
+}
+juros = {
+  init : function(){
+    var iteracoes = [];
+    var jurosPMT = $("#jurosPMT").val();
+    var jurosFV = $('#jurosFV').val();
+    var jurosN = $('#jurosN').val();
+    var jurosErro = $('#jurosErro').val();
+    var funcao = "(1 + x)^ " + jurosN +" - 1 - x * (" + jurosFV + "/" + jurosPMT + ")";
+    var erro = 1;
+    var id = 1;
+    var valorInicial = this.valorInicial(jurosPMT, jurosFV, jurosN);
+    var Fa = this.funcao(funcao, valorInicial);
+
+    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(casasDecimais)) , "-");
+    iteracoes.push(iteracao);
+
+    while(erro > jurosErro){
+      this.calcular(iteracoes, id, funcao);
+      erro = iteracoes[id].taxaDeErro;
+      id++;
+      if(id > 100){
+        break;
+      }
+    }
+    this.drawTable(iteracoes);
+  },
+  valorInicial : function(jurosPMT, jurosFV, jurosN){
+    var funcao = jurosFV + "/ ("+ jurosPMT +" * " + jurosN +"^2) - " + jurosPMT + "/"+ jurosFV;
+    var total = math.evaluate(funcao);
+    return parseFloat(total.toFixed(casasDecimais));
+  },
+  calcular : function(iteracoes, id, funcao){
+    var funcao1 = math.derivative(funcao,"x").toString();
+    var valor = iteracoes[id - 1].X;
+    var Fx = this.funcao(funcao, valor);
+    var Fx1 = this.funcao(funcao1, valor);
+    var total = valor - ( Fx / Fx1 );
+    var erro = Math.abs(total - valor);
+    var Fx = this.funcao(funcao, total);
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(casasDecimais)), parseFloat(Fx.toFixed(casasDecimais)), parseFloat(erro.toFixed(casasDecimais)));
+    iteracoes.push(iteracao);
+  },
+  funcao : function(funcao, value){
+    var scope = {
+      x: value
+    }
+    var total = math.evaluate(funcao, scope);
+    return parseFloat(total.toFixed(casasDecimais));
+  },
+  show : function(){
+    $("#table-secantes").empty();
+    $("#table-bissecao").empty();
+    $("#table-newton").empty();
+    $("#table-juros").empty();
+    window.scrollTo({ top: 1800, behavior: 'smooth' });
+  },
+  drawTable : function(iteracoes){
+    $("#table-juros").empty();
+    var taxErro = $('#jurosErro').val();
+    $('#table-juros').append(`<thead id='thead-juros'><tr><th scope='col'>n</th><th scope='col'>Xn</th><th scope='col'>f(Xn)</th><th scope='col'>Taxa de Erro(${taxErro})</th></tr></thead><tbody id='tbody-juros'></tbody>`);
+     for(var i = 0; i < iteracoes.length; i++){
+       var element = iteracoes[i];
+       $('#tbody-juros').append(`<tr><th>${element.id}</th><th>${element.X}</th><th>${element.Fx}</th><th>${element.taxaDeErro}</th></tr>`)
      }
   },
 }

@@ -6,7 +6,7 @@
   -ms-user-select: none;
   user-select: none;
 }
-#secButton, #bisButton, #newButton, #btnImportant{
+#secButton, #bisButton, #newButton, #jurosButton, #btnImportant{
   background: none;
   border: none;
 }
