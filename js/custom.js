@@ -1,3 +1,4 @@
+const casasDecimais = 5;
 function Iteracao(id, X, Fx, taxaDeErro, A, B) {
   this.id = id;
 	this.A = A;
@@ -63,7 +64,7 @@ bissecao = {
     }
     var funcao = $("#function").val();
     var total = math.evaluate(funcao, scope);
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(casasDecimais));
   },
   calcularMaxIteracoes : function(A, B, errorTax){
     var valor = (B - A)/errorTax;
@@ -72,11 +73,11 @@ bissecao = {
   },
   calcularPontoMedio : function(A,B){
     var total = (A + B) / 2;
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(casasDecimais));
   },
   calcularTaxaDeErro : function(A,B){
     var total = (B - A) / 2;
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(casasDecimais));
   },
   drawTable : function(iteracoes){
     $("#table-bissecao").empty();
@@ -104,9 +105,9 @@ secantes ={
     var Fa = this.funcao(A);
     var Fb = this.funcao(B);
 
-    var iteracao = new Iteracao(0, A, parseFloat(Fa.toFixed(4)) , "-");
+    var iteracao = new Iteracao(0, A, parseFloat(Fa.toFixed(casasDecimais)) , "-");
     iteracoes.push(iteracao);
-    var iteracao = new Iteracao(1, B, parseFloat(Fb.toFixed(4)), Math.abs(A - B));
+    var iteracao = new Iteracao(1, B, parseFloat(Fb.toFixed(casasDecimais)), Math.abs(A - B));
     iteracoes.push(iteracao);
     var erro = 1;
     while(erro > taxErro){
@@ -125,7 +126,7 @@ secantes ={
     }
     var total = math.evaluate("((a*d)-(b*c))/(d-c)", scope);
     var Ftotal = secantes.funcao(total);
-    var iteracao = new Iteracao(id, parseFloat(total.toFixed(4)), parseFloat(Ftotal.toFixed(4)), parseFloat(Math.abs(scope.b - total).toFixed(4)));
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(casasDecimais)), parseFloat(Ftotal.toFixed(casasDecimais)), parseFloat(Math.abs(scope.b - total).toFixed(casasDecimais)));
     return iteracao;
   },
   drawTable : function(iteracoes){
@@ -143,7 +144,7 @@ secantes ={
     }
     var funcao = $("#functionSec").val();
     var total = math.evaluate(funcao, scope);
-    return parseFloat(total.toFixed(4));
+    return parseFloat(total.toFixed(casasDecimais));
   },
   show : function(){
     $("#table-secantes").empty();
@@ -167,22 +168,20 @@ newton = {
     }
     var Fa = this.funcao(funcao, valorInicial);
 
-    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(this.casasDecimais())) , "-");
+    var iteracao = new Iteracao(0, valorInicial, parseFloat(Fa.toFixed(casasDecimais)) , "-");
     iteracoes.push(iteracao);
 
     while(erro > taxErro){
       this.calcular(iteracoes, id);
       erro = iteracoes[id].taxaDeErro;
       id++;
-      if(id > 10){
+      if(id > 100){
+        console.log("Vazando do while id: " + id)
         break;
       }
     }
 
     this.drawTable(iteracoes);
-  },
-  casasDecimais: function(){
-    return parseInt($("#casasDecimaisNewton").val());
   },
   valorInicial : function(funcao, A, B){
     var funcao1 = math.derivative(funcao,"x").toString();
@@ -199,7 +198,7 @@ newton = {
     var total = valor - ( Fx / Fx1 );
     var erro = Math.abs(total - valor);
     var Fx = this.funcao(funcao, total);
-    var iteracao = new Iteracao(id, parseFloat(total.toFixed(this.casasDecimais())), parseFloat(Fx.toFixed(this.casasDecimais())), parseFloat(erro.toFixed(this.casasDecimais())));
+    var iteracao = new Iteracao(id, parseFloat(total.toFixed(casasDecimais)), parseFloat(Fx.toFixed(casasDecimais)), parseFloat(erro.toFixed(casasDecimais)));
     iteracoes.push(iteracao);
   },
   funcao : function(funcao, value){
@@ -207,7 +206,7 @@ newton = {
       x: value
     }
     var total = math.evaluate(funcao, scope);
-    return parseFloat(total.toFixed(this.casasDecimais()));
+    return parseFloat(total.toFixed(casasDecimais));
   },
   show : function(){
     $("#table-secantes").empty();
