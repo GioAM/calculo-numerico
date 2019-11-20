@@ -15,6 +15,10 @@ Resolução de métodos numéricos vistos na matéria de Cálculo Número
   - Bootstrap
   - JQuery
   - MathJS
-###MathJS
+### MathJS
 A biblioteca MathJS facilita na resolução das funções e derivadas.
 https://mathjs.org/
+## Métodos Númericos
+- Método de Bisseção
+- Método de Secantes
+- Método de Newton
