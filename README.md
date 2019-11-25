@@ -3,7 +3,7 @@ Resolução de métodos numéricos vistos na matéria de Cálculo Número
 
 -------------------- 
 
-- **Demo:** https://gioam.github.io/mapeamento-de-tarefas/
+- **Demo:** https://gioam.github.io/calculo-numerico/
 
 --------------------
 ## Desenvolvimento
